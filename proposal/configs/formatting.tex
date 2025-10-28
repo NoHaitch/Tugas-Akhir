@@ -57,11 +57,11 @@
 
 % --- ToC entry format for chapters ---
 \titlecontents{chapter}
-[0pt]                                                 % No indentation
-{\bfseries}                                           % Bold chapter entries
-{\MakeUppercase{Bab}\ \thecontentslabel\quad}         % Prefix “Bab” before number
-{}                                                    % No prefix text
-{\mdseries\dotfill\bfseries\contentspage}             % Dotted leaders + bold page numbers
+[0pt]                                                       % No indentation
+{\bfseries}                                                 % Bold chapter entries
+{\makebox[3.8em][l]{\MakeUppercase{Bab}\ \thecontentslabel}} % Prefix in a fixed-width "tab" box
+{}                                                          % No prefix text
+{\mdseries\dotfill\bfseries\contentspage}                   % Dotted leaders + bold page numbers
 
 % --- ToC entry format for figures ---
 \titlecontents{figure}
