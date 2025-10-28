@@ -18,21 +18,32 @@
 \newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}                              % Define new command for 4th-level headings
 \titleformat{\subsubsubsection}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}  % Format font/size/numbering
 \titlespacing*{\subsubsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}     % Control spacing above/below heading
-\titlespacing*{\chapter}{0pt}{0pt}{4pt}                                                 % Reduce vertical space before chapter titles (\tableofcontents, etc.)
 
 % --- Chapter title formatting ---
 \renewcommand{\thechapter}{\Roman{chapter}}               % Use Roman numerals for chapter numbering
 \chapterfont{\centering \large}                           % Center and enlarge chapter titles
 \titleformat{\chapter}[display]                           % Customize chapter title layout
-  {\Large\centering\bfseries}                             % - Large, bold, centered font
+  {\large\centering\bfseries}                             % - Large, bold, centered font
   {\MakeUppercase{\chaptertitlename}\ \thechapter}        % - Prefix “BAB” and chapter number (uppercase)
   {0pt}                                                   % - No extra separation between label and title
-  {\Large\bfseries\MakeUppercase}                         % - Convert title text to uppercase and bold
+  {\large\bfseries\MakeUppercase}                         % - Convert title text to uppercase and bold
 
 % --- Section/subsection font sizes ---
 \sectionfont{\normalsize}                                 % Normal-size section titles
 \subsectionfont{\normalsize}
 \subsubsectionfont{\normalsize}
+
+% --- Section spacing and line spacing ---
+\titlespacing*{\section}
+  {0pt}                         % left margin
+  {12pt plus 2pt minus 1pt}     % space before section
+  {3pt plus 1pt minus 1pt}      % space after section
+
+\titleformat{\section}
+  {\normalfont\normalsize\bfseries\setstretch{1.5}}   % font + 1.5 line spacing
+  {\thesection.}                                      % numbering
+  {1em}                                               % spacing between number and title
+  {}                                                  % code before the title
 
 % --- Adjust dot leader spacing ---
 \makeatletter
@@ -78,7 +89,7 @@
 \makeatletter
 \renewcommand{\listoftables}{
   \chapter*{\listtablename}
-  \addcontentsline{toc}{chapter}{\listtablename}
+  % \addcontentsline{toc}{chapter}{\listtablename}
   \begingroup
     \setstretch{1}
     \setlength{\parskip}{0pt}
@@ -89,7 +100,7 @@
 
 \renewcommand{\listoffigures}{
   \chapter*{\listfigurename}
-  \addcontentsline{toc}{chapter}{\listfigurename}
+  % \addcontentsline{toc}{chapter}{\listfigurename}
   \begingroup
     \setstretch{1}
     \setlength{\parskip}{0pt}
@@ -100,7 +111,7 @@
 
 \renewcommand{\tableofcontents}{
   \chapter*{\contentsname}
-  \addcontentsline{toc}{chapter}{\contentsname}
+  % \addcontentsline{toc}{chapter}{\contentsname}
   \begingroup
     \setstretch{1.5}
     \setlength{\parskip}{0pt}
@@ -112,7 +123,7 @@
 
 \newcommand{\listofappendices}{
   \chapter*{\contentsname}
-  \addcontentsline{toc}{chapter}{\contentsname}
+  % \addcontentsline{toc}{chapter}{\contentsname}
   \begingroup
     \setstretch{1.5}
     \setlength{\parskip}{0pt}
@@ -129,10 +140,8 @@
 
 % --- Redefine list of appendices command ---
 \renewcommand{\listofappendices}{                   
-  \cleardoublepage
   \phantomsection
   \listofatoc
-  \addcontentsline{toc}{chapter}{\lopname}         
 }
 
 % --- Save and restore ToC depth for appendices ---
