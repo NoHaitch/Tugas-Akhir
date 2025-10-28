@@ -1,0 +1,59 @@
+% ------------------------------------------------------------------- %
+%  MAIN DOCUMENT
+%  AUTHOR: Raden Francisco Trianto Bratadiningrat (@NoHaitch)
+%  DATE: 2025-10-28
+% ------------------------------------------------------------------- %
+
+\documentclass[bahasa, 12pt, a4paper, onecolumn, oneside, final]{report}
+
+% ---- Import preamble configs ----
+\input{configs/documentsetup.tex}
+
+% --- PDF Metadata ---
+\makeatletter
+\hypersetup{
+    pdfencoding=auto,
+    psdextra,
+    hidelinks,
+    pdfauthor={\@author},
+    pdftitle={\@title},
+    pdfsubject={\prodi~--~\itb},
+    pdfkeywords={\keywords},
+}
+\makeatother
+
+% ---- Document Layout ----
+\begin{document}
+
+% Cover
+\input{contents/0-cover.tex}
+
+% Approval
+\input{contents/1-approval.tex}     % jika satu pembimbing
+\input{contents/1-approval-2.tex}   % jika dua pembimbing
+
+% Table of Contents - chapters
+\tableofcontents
+
+% List of Appendices
+\listofappendices
+
+% List of Figures (images)
+\listoffigures
+
+% List of Tables
+\listoftables
+
+% Chapters
+\input{contents/2-introduction.tex}
+\input{contents/3-literature.tex}
+\input{contents/4-analysis.tex}
+\input{contents/5-schedule.tex}
+
+% Blibliography
+\printbibliography[title={DAFTAR PUSTAKA}]
+
+% Appendices
+\input{contents/6-appendix.tex}
+
+\end{document}

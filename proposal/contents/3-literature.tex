@@ -1,0 +1,74 @@
+% ------------------------------------------------------------------- %
+%  LITERATURE REVIEW CHAPTER
+%  AUTHOR: Raden Francisco Trianto Bratadiningrat (@NoHaitch)
+%  DATE: 2025-10-28
+% ------------------------------------------------------------------- %
+
+% ----- JUDUL BAB -----
+\chapter{Kajian Pustaka}
+
+Bab Kajian Pustaka digunakan untuk mendeskripsikan kajian literatur yang terkait dengan persoalan tugas akhir. Tujuan kajian pustaka adalah:
+
+\begin{enumerate}
+    \item Memberikan pemahaman yang cukup kepada pembaca tentang teori atau pekerjaan yang terkait langsung dengan penyelesaian persoalan
+    \item Menyampaikan informasi apa saja yang sudah ditulis/dilaporkan oleh pihak lain (peneliti/Tugas Akhir/Tesis) tentang hasil penelitian/pekerjaan mereka yang sama/mirip/erat kaitannya dengan persoalan tugas akhir
+    \item Menunjukkan kepada pembaca adanya gap seperti pada rumusan masalah yang memang belum terselesaikan
+\end{enumerate}
+
+\section{Contoh Subbab}
+
+Contoh subbab.
+
+\subsection{Contoh Referensi Sitasi}
+
+Referensi diletakan pada format biblitext dalam file `references.bib`
+
+Referensi disitasi menggunakan format APA dengan `cite\{\}`
+
+Publikasi ilmiah sudah berkembang dari abad ke-17, dengan terbitnya \textit{Philosophical Transactions} oleh Royal Society. Sistem publikasi ilmiah terus berevolusi untuk menjawab kebutuhan validasi, standarisasi, dan kolaborasi antar ilmuwan dalam mendokumentasikan serta menyebarluaskan pengetahuan secara formal (\cite{fyfe2022}).
+
+\subsubsection{Contoh Gambar}
+
+Contoh gambar adalah sebagaimana terlihat pada Gambar~\ref{fig:contoh-inline}, 
+
+\begin{center}
+    \includegraphics[width=10cm]{images/example.jpg}
+    \captionof{figure}{Tahapan konstruksi koleksi retorik kalimat}
+    \label{fig:contoh-inline}
+\end{center}
+
+
+\subsubsubsection{Contoh Tabel}
+
+Data dapat dilihat pada Tabel~\ref{tab:contoh-merge} berikut.
+
+\begin{table}[!htbp]
+    \centering
+    \DefaultTableFormatting                
+    \caption{Contoh Tabel}
+    \begin{tabularx}{\textwidth}{|c|X|c|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}
+        \textbf{No.} & \textbf{Kegiatan} & \textbf{Waktu Pelaksanaan} \\
+        \hline
+
+        % Multi-row example
+        \multirow{2}{*}{1} & Studi Literatur & Januari 2025 \\
+        \cline{2-3}
+        & Analisis Kebutuhan & Februari 2025 \\
+        \hline
+
+        % Normal row
+        2 & Perancangan Sistem & Maret 2025 \\
+        \hline
+
+        % Multi-column example
+        3 & \multicolumn{2}{c|}{Implementasi dan Pengujian (April–Mei 2025)} \\
+        \hline
+
+        % Normal row
+        4 & Dokumentasi & Juni 2025 \\
+        \hline
+    \end{tabularx}
+    \label{tab:contoh-merge}
+\end{table}
