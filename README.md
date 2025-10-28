@@ -9,7 +9,7 @@
   <h3>FYI Masih template tahun 2024/2025</h3>
 
   <p align="center">
-    <a href="https://github.com/new?template_name=Template-Proposal-dan-TA-IF-ITB&template_owner=NoHaitch"><h3>Use this template</h3></a>
+    <h3><a href="https://github.com/new?template_name=Template-Proposal-dan-TA-IF-ITB&template_owner=NoHaitch">Use this template</a></h3>
     <br/>
     <strong>Ada kesalahan? Bikin Fork -> Buat Pull Request</strong>
     <br/>
