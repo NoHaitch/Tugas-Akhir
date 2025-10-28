@@ -18,34 +18,34 @@
 \newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}                              % Define new command for 4th-level headings
 \titleformat{\subsubsubsection}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}  % Format font/size/numbering
 \titlespacing*{\subsubsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}     % Control spacing above/below heading
-\titlespacing*{\chapter}{0pt}{0pt}{4pt}                                                 % Reduce the vertical space before chapter titles (\tableofcontents, \listoffigures, \listoftables)
+\titlespacing*{\chapter}{0pt}{0pt}{4pt}                                                 % Reduce vertical space before chapter titles (\tableofcontents, etc.)
 
-% --- Chapter title formatting --
-\renewcommand{\thechapter}{\Roman{chapter}}               % Change chapter numbering to Roman numerals 
+% --- Chapter title formatting ---
+\renewcommand{\thechapter}{\Roman{chapter}}               % Use Roman numerals for chapter numbering
 \chapterfont{\centering \large}                           % Center and enlarge chapter titles
 \titleformat{\chapter}[display]                           % Customize chapter title layout
-  {\Large\centering\bfseries}                             %    - Large, bold, centered font
-  {\MakeUppercase{\chaptertitlename}\ \thechapter}        %    - Prefix “BAB” and chapter number (uppercase)
-  {0pt}                                                   %    - No extra separation between label and title
-  {\Large\bfseries\MakeUppercase}                         %    - Convert title text to uppercase and bold (use LaTeX \MakeUppercase)
+  {\Large\centering\bfseries}                             % - Large, bold, centered font
+  {\MakeUppercase{\chaptertitlename}\ \thechapter}        % - Prefix “BAB” and chapter number (uppercase)
+  {0pt}                                                   % - No extra separation between label and title
+  {\Large\bfseries\MakeUppercase}                         % - Convert title text to uppercase and bold
 
-% --- Section formatting --
-\sectionfont{\normalsize}                                 % Center and enlarge section titles
-\subsectionfont{\normalsize} 
-\subsubsectionfont{\normalsize} 
+% --- Section/subsection font sizes ---
+\sectionfont{\normalsize}                                 % Normal-size section titles
+\subsectionfont{\normalsize}
+\subsubsectionfont{\normalsize}
 
-% --- Table of Contents (ToC), List of Figures/Tables ---
+% --- Adjust dot leader spacing ---
 \makeatletter
-\renewcommand{\@dotsep}{1}            % Adjust dot spacing in ToC leader lines (closer spacing)
+\renewcommand{\@dotsep}{1}            % Closer dot spacing in ToC
 \makeatother
 
 % --- ToC entry format for chapters ---
-\titlecontents{chapter}                               % Customized ToC
-[0pt]                                                 % - No indentation
-{\bfseries}                                           % - Bold chapter entries
-{\MakeUppercase{Bab} \thecontentslabel\quad}          % - Label “Bab” in uppercase before number
-{}                                                    % - No extra prefix
-{\mdseries\dotfill\bfseries\contentspage}             % - Dotted leaders + bold page numbers (use \dotfill to avoid titletoc internals)
+\titlecontents{chapter}
+[0pt]                                                 % No indentation
+{\bfseries}                                           % Bold chapter entries
+{\MakeUppercase{Bab}\ \thecontentslabel\quad}         % Prefix “Bab” before number
+{}                                                    % No prefix text
+{\mdseries\dotfill\bfseries\contentspage}             % Dotted leaders + bold page numbers
 
 % --- ToC entry format for figures ---
 \titlecontents{figure}
@@ -61,23 +61,87 @@
 {}
 {\mdseries\dotfill\bfseries\contentspage}
 
-% --- Appendix formatting ---
-\newcommand*{\lopname}{Daftar Lampiran}             % Define custom list name for appendices
-\TOCclone[\lopname]{toc}{atoc}                      % Create a new ToC clone (for list of appendices)
-\addtocontents{atoc}{\protect\value{tocdepth}=-1}   % Hide deeper levels from appendix list
+% --- Single-spaced list entries only ---
+\newcommand{\SingleSpacingEntriesOnly}[1]{%
+  {%
+    \begingroup #1\endgroup       % Print title normally
+    \begingroup
+      \setstretch{1}              % Single spacing
+      \setlength{\parskip}{0pt}
+      \normalsize
+      \@starttoc{\@nameuse{ext@#1}}%
+    \endgroup
+  }%
+}
 
-\newcommand\listofappendices{                       % Command to print appendix list
+% --- Patch the standard list commands ---
+\makeatletter
+\renewcommand{\listoftables}{
+  \chapter*{\listtablename}
+  \addcontentsline{toc}{chapter}{\listtablename}
+  \begingroup
+    \setstretch{1}
+    \setlength{\parskip}{0pt}
+    \normalsize
+    \@starttoc{lot}
+  \endgroup
+}
+
+\renewcommand{\listoffigures}{
+  \chapter*{\listfigurename}
+  \addcontentsline{toc}{chapter}{\listfigurename}
+  \begingroup
+    \setstretch{1}
+    \setlength{\parskip}{0pt}
+    \normalsize
+    \@starttoc{lof}
+  \endgroup
+}
+
+\renewcommand{\tableofcontents}{
+  \chapter*{\contentsname}
+  \addcontentsline{toc}{chapter}{\contentsname}
+  \begingroup
+    \setstretch{1.5}
+    \setlength{\parskip}{0pt}
+    \normalsize
+    \@starttoc{toc}
+  \endgroup
+}
+
+
+\newcommand{\listofappendices}{
+  \chapter*{\contentsname}
+  \addcontentsline{toc}{chapter}{\contentsname}
+  \begingroup
+    \setstretch{1.5}
+    \setlength{\parskip}{0pt}
+    \normalsize
+    \@starttoc{toc}
+  \endgroup
+}
+\makeatother
+
+% --- Custom appendix list title ---
+\newcommand*{\lopname}{Daftar Lampiran}               % Define name for appendix list
+\TOCclone[\lopname]{toc}{atoc}                        % Create clone ToC for appendices
+\addtocontents{atoc}{\protect\value{tocdepth}=-1}     % Hide deeper levels in appendix list
+
+% --- Redefine list of appendices command ---
+\renewcommand{\listofappendices}{                   
   \cleardoublepage
   \phantomsection
   \listofatoc
   \addcontentsline{toc}{chapter}{\lopname}         
 }
 
+% --- Save and restore ToC depth for appendices ---
 \newcommand*\savedtocdepth{}      
 \AtBeginDocument{
   \edef\savedtocdepth{\the\value{tocdepth}}
 }
 
+% --- Appendix formatting setup ---
 \let\originalappendix\appendix
 \renewcommand\appendix{
   \originalappendix
@@ -85,6 +149,7 @@
   \addtocontents{toc}{\protect\value{tocdepth}=-1}
   \addtocontents{atoc}{\protect\value{tocdepth}=\savedtocdepth}
 
+  % Appendix ToC entry format
   \titlecontents{chapter}
     [0pt]
     {\bfseries}
@@ -92,6 +157,7 @@
     {}
     {\dotfill\contentspage}
 
+  % Appendix title format
   \titleformat{\chapter}[block]
     {\Large\bfseries}
     {\chaptertitlename\ \thechapter.\quad}
@@ -99,32 +165,32 @@
     {\Large\bfseries}
 }
 
-% --- Figure & table numbering ---
-\counterwithin{figure}{chapter}           % Reset figure numbering per chapter (e.g. Figure 1.1, 1.2, ...)
-\counterwithin{table}{chapter}            % Reset table numbering per chapter (e.g. Table 1.1, 1.2, ...)
+% --- Figure & table numbering per chapter ---
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
 
 % --- Blank page command ---
 \newcommand*{\blankpage}{\afterpage{\null\newpage}}       % Insert a blank page 
 
-% --- Autoref translation (Indonesian) ---
-\renewcommand*{\equationautorefname}{Persamaan}           % Rename “Equation” → “Persamaan”
-\renewcommand*{\figureautorefname}{Gambar}                % Rename “Figure” → “Gambar”
-\renewcommand*{\tableautorefname}{Tabel}                  % Rename “Table” → “Tabel”
-\renewcommand*{\chapterautorefname}{Bab}                  % Rename “Chapter” → “Bab”
-\renewcommand*{\sectionautorefname}{Subbab}               % Rename “Section” → “Subbab”
-\renewcommand*{\subsectionautorefname}{Subsubbab}         % Rename “Subsection” → “Subsubbab”
-\renewcommand*{\subsubsectionautorefname}{Subsubsubbab}   % Rename “Subsubsection” → “Subsubsubbab”
-\renewcommand*{\appendixautorefname}{Lampiran}            % Rename “Appendix” → “Lampiran”
+% --- Autoref translation ---
+\renewcommand*{\equationautorefname}{Persamaan}
+\renewcommand*{\figureautorefname}{Gambar}
+\renewcommand*{\tableautorefname}{Tabel}
+\renewcommand*{\chapterautorefname}{Bab}
+\renewcommand*{\sectionautorefname}{Subbab}
+\renewcommand*{\subsectionautorefname}{Subsubbab}
+\renewcommand*{\subsubsectionautorefname}{Subsubsubbab}
+\renewcommand*{\appendixautorefname}{Lampiran}
 
-% --- Ignore underflow warnings ---
-\hbadness=99999    % Suppress “underfull hbox” warnings (too loose horizontal spacing)
+% --- Ignore underfull box warnings ---
+\hbadness=99999
 
-% --- Adjust table caption position to top ---
-\captionsetup[table]{position=above}      % Set table captions to appear above the table
-\captionsetup[image]{position=below}      % Set table captions to appear above the table
+% --- Adjust caption positions ---
+\captionsetup[table]{position=above}      % Table captions above
+\captionsetup[image]{position=below}      % Image captions below
 
-% --- Table Formatting ---
+% --- Default table formatting macro ---
 \newcommand{\DefaultTableFormatting}{
-    \renewcommand{\arraystretch}{1.5}   % Row height
-    \setlength{\tabcolsep}{10pt}        % Column padding
+    \renewcommand{\arraystretch}{1.5}     % Row height
+    \setlength{\tabcolsep}{10pt}          % Column padding
 }
