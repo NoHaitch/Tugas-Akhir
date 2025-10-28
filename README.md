@@ -50,10 +50,12 @@ Silakan mengunduh, menggunakan, memodifikasi, dan menyebarkan template ini. Namu
 
 Buat Repo baru dengan template [atau bisa click tautan ini](https://github.com/new?template_name=Template-Proposal-dan-TA-IF-ITB&template_owner=NoHaitch)
 
+Kalo urusan commands latex. Bisa cari sendiri :)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-## How to use LaTeX
+## Installation
 
 Buat yang new untuk LaTeX, suggesti menggunakan compiler [TeXLive](https://tug.org/texlive/). 
 
