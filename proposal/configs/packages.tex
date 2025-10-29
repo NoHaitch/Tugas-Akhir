@@ -32,10 +32,10 @@
 % --- Figures, tables, and lists ---
 \usepackage{graphicx}           % Insert and scale images
 \usepackage{subfig}             % Create subfigures (a), (b), (c) under one main figure caption
+\usepackage{array}              % Extended column types and formatting options for tables
 \usepackage{longtable}          % Create tables that span multiple pages
 \usepackage{booktabs}           % Professional-quality table lines (\toprule, \midrule, \bottomrule)
 \usepackage{tabularx}           % Tables with auto-stretch columns for flexible widths
-\usepackage{array}              % Extended column types and formatting options for tables
 \usepackage{listings}           % Display and format source code with syntax highlighting
 \usepackage{parskip}            % Remove paragraph indentation and manage spacing between paragraphs
 \usepackage{afterpage}          % Defer command execution until the current page is finished
@@ -43,6 +43,10 @@
 \usepackage{relsize}            % Adjust font size relatively (\smaller, \larger, \textsmaller, etc.)
 \usepackage{caption}            % Customize captions for figures and tables
 \usepackage{multirow}           % Create table cells that span multiple rows
+\usepackage{float}              % Improved interface for floating objects (figures, tables)
+
+\usepackage{xltabular}           % Combine features of longtable and tabularx for better table handling
+\keepXColumns
 
 % --- Hyperlinks & citation ---
 \usepackage{csquotes}                                               % Context-sensitive quotation facilities
